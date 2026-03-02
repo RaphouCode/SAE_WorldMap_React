@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet de Jean Dupont - Tour Eiffel</title>
+    <!-- Import de la librairie Google Model Viewer -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --surface-color: #1a1a1a;
+            --primary-color: #00ffcc;
+            --text-main: #ffffff;
+            --text-muted: #999999;
+            --border-color: #333333;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            /* Prend toute la hauteur de l'iframe */
+            width: 100%;
+        }
+
+        /* ----- PARTIE ARTICLE (Gauche) ----- */
+        .content-section {
+            flex: 1;
+            padding: 50px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(0, 255, 204, 0.15);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin: 0 0 20px 0;
+            line-height: 1.1;
+            font-weight: 800;
+            background: linear-gradient(90deg, #fff, #bbb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .author-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--surface-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+        }
+
+        .author-info p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .author-info .name {
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 1.1rem;
+        }
+
+        .author-info .date {
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .article-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #d1d1d1;
+        }
+
+        .article-body p {
+            margin-bottom: 25px;
+        }
+
+        /* ----- PARTIE MODÈLE 3D (Droite) ----- */
+        .model-section {
+            flex: 1.2;
+            /* Laisse un peu plus de place à la 3D */
+            background: radial-gradient(circle at center, #2a2a2a 0%, #111 100%);
+            border-left: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            --poster-color: transparent;
+        }
+
+        /* Responsive : colonnes qui s'empilent sur petits écrans */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column-reverse;
+                height: auto;
+            }
+
+            .content-section,
+            .model-section {
+                flex: none;
+                width: 100%;
+            }
+
+            .model-section {
+                height: 50vh;
+                border-left: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .content-section {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Colonne Texte / Article -->
+        <div class="content-section">
+            <div>
+                <span class="badge">Architecture & Histoire</span>
+                <h1>La Tour Eiffel</h1>
+
+                <div class="author-meta">
+                    <div class="author-avatar">JD</div>
+                    <div class="author-info">
+                        <p class="name">Jean Dupont</p>
+                        <p class="date">Publié le 12 Février 2026</p>
+                    </div>
+                </div>
+
+                <div class="article-body">
+                    <p>
+                        La Tour Eiffel est une tour de fer puddlé de 330 mètres de hauteur
+                        située à Paris, à l'extrémité nord-ouest du parc du Champ-de-Mars en bordure de la Seine.
+                    </p>
+                    <p>
+                        Construite en deux ans, deux mois et cinq jours par Gustave Eiffel et ses collaborateurs pour
+                        l'Exposition universelle de Paris de 1889,
+                        elle a été pendant 41 ans la structure la plus haute du monde. Son design iconique est
+                        immédiatement reconnaissable.
+                    </p>
+                    <p
+                        style="padding: 15px; border-left: 4px solid #00ffcc; background: rgba(0,255,204,0.05); font-style: italic;">
+                        Interagissez avec l'objet 3D ci-contre ! Vous pouvez le faire pivoter avec votre souris,
+                        utiliser la molette pour zoomer, et l'analyser sous toutes ses coutures. (Note de test : le
+                        modèle affiché est un astronaute générique servant de placeholder 3D).
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Colonne Objet 3D -->
+        <div class="model-section">
+            <!-- Balise Model-Viewer. L'attribut src pointe vers un modèle officiel Google de démo -->
+            <!-- Vos camarades remplaceront ce lien par "./assets/le-nom-de-leur-modele.glb" -->
+            <model-viewer src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+                alt="Modèle 3D Astronaut (Placeholder)" auto-rotate rotation-per-second="30deg" camera-controls
+                shadow-intensity="1.5" exposure="1.2" environment-image="neutral">
+            </model-viewer>
+        </div>
+
+    </div>
+</body>
+
+</html>

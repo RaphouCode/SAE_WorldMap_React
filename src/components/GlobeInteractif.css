@@ -1,0 +1,130 @@
+.globe-container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.modal-content {
+  background: #1a1a1a;
+  color: #fff;
+  width: 98vw;
+  height: 96vh;
+  border-radius: 12px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #333;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 10;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #fff;
+}
+
+
+.iframe-container {
+  flex: 1;
+  width: 100%;
+  background: #000;
+}
+
+.iframe-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Custom 2D markers styles */
+.marker-wrapper {
+  position: relative;
+  cursor: pointer;
+  pointer-events: auto;
+  /* Centering the wrapper exactly on the coordinate */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.marker-dot {
+  width: 14px;
+  height: 14px;
+  background-color: #00ffcc;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 10px #00ffcc;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.marker-wrapper:hover .marker-dot {
+  transform: scale(1.4);
+  background-color: #fff;
+  box-shadow: 0 0 15px #00ffcc, 0 0 25px #00ffcc;
+}
+
+.marker-tooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: white;
+  font-family: sans-serif;
+  text-align: center;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s, visibility 0.2s;
+  pointer-events: none;
+  border: 1px solid #333;
+}
+
+.marker-wrapper:hover .marker-tooltip {
+  visibility: visible;
+  opacity: 1;
+}

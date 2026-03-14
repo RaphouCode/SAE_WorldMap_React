@@ -30,6 +30,9 @@ Créez un dossier nommé avec vos noms de famille séparés par des tirets (ex: 
  └── 📁 assets/            <-- Vos modèles 3D (.glb), images, js...
 ```
 
+> [!TIP]
+> **Modèle d'exemple** : Un dossier complet `dupont-martin` est déjà présent dans `/public/projets/`. N'hésitez pas à l'ouvrir et à étudier son `index.html` ou son `infos.json` pour comprendre comment configurer correctement votre propre dossier !
+
 ---
 
 ## ⚙️ 3. Le fichier `infos.json`

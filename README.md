@@ -77,10 +77,10 @@ Quand un groupe fait une Pull Request, son intégration peut être vérifiée de
 
 ## 🚀 6. Lancer le projet localement sur sa machine
 
-Si vous souhaitez tester le globe avec votre projet avant de faire votre Pull Request, c'est indispensable ! Voici comment faire la première fois :
+Si vous souhaitez tester le globe avec votre projet avant de faire votre Pull Request :
 
 1. Ouvrez un terminal dans le dossier du projet via VSCode (ou autre).
-2. **Étape cruciale** : installez les dépendances du projet Node.js en tapant la commande suivante :
+2. Installez les dépendances du projet Node.js en tapant la commande suivante :
    ```bash
    npm install
    ```
@@ -88,4 +88,4 @@ Si vous souhaitez tester le globe avec votre projet avant de faire votre Pull Re
    ```bash
    npm run dev
    ```
-4. Ouvrez le lien `http://localhost:5173` dans votre navigateur. Le script va générer de lui-même la liste des projets avant de lancer le site web.
+4. Ouvrez le lien LocalHost dans votre navigateur.

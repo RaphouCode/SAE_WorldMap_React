@@ -16,6 +16,10 @@ Puisque vous ne pouvez pas envoyer (push) votre code directement sur la branche 
 4. Effectuez vos commits et **poussez (push)** votre branche sur GitHub.
 5. Allez sur la page GitHub du dépôt principal, et cliquez sur le bouton vert **"Compare & pull request"** pour demander l'intégration de votre branche dans le `main`.
 
+> [!WARNING]
+> **Ne soumettez votre Pull Request que lorsque votre projet est 100% terminé !** 
+> Votre page et modèle 3D doivent être définitifs et testés en local. Ne faites pas de *Pull Request* partielle ou "pour tester" afin d'éviter à l'administrateur de devoir relire et valider de multiples brouillons.
+
 ---
 
 ## 📂 2. Structure obligatoire de votre dossier

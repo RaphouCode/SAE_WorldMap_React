@@ -25,6 +25,10 @@ export default function GlobeInteractif() {
         if (globeEl.current) {
             globeEl.current.controls().autoRotate = true;
             globeEl.current.controls().autoRotateSpeed = 0.2;
+
+            // Limiter le dézoom pour ne pas perdre la Terre de vue et le zoom pour ne pas la traverser
+            globeEl.current.controls().minDistance = 120; // max zoom in
+            globeEl.current.controls().maxDistance = 400; // max zoom out
         }
 
         return () => window.removeEventListener('resize', handleResize);
@@ -65,6 +69,9 @@ export default function GlobeInteractif() {
 
                     const el = document.createElement('div');
                     el.className = 'marker-dot';
+                    if (d.couleur) {
+                        el.style.setProperty('--marker-color', d.couleur);
+                    }
                     wrapper.appendChild(el);
 
                     const tooltip = document.createElement('div');
@@ -89,6 +96,12 @@ export default function GlobeInteractif() {
                 <div className="modal-overlay" onClick={closeModal}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                         <button className="close-btn" onClick={closeModal}>&times;</button>
+
+                        <div className="iframe-loader">
+                            <div className="spinner"></div>
+                            <p>Chargement du projet 3D...</p>
+                        </div>
+
                         <div className="iframe-container">
                             <iframe
                                 src={`/projets/${selectedProject.id}/index.html`}

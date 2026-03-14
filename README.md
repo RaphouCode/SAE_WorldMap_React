@@ -43,9 +43,12 @@ Ce fichier permet au système de placer votre point sur le globe et d'indiquer q
   "titre_objet": "Statue de la Liberté",
   "latitude": 40.6892,
   "longitude": -74.0445,
-  "description_courte": "Modélisation 3D de la Statue de la Liberté par notre duo."
+  "description_courte": "Modélisation 3D de la Statue de la Liberté par notre duo.",
+  "couleur": "#ff00cc"
 }
 ```
+
+* **`couleur` (Optionnel)** : Permet de choisir la couleur de votre point de localisation sur le globe (ex: `"#ff00cc"`, `"red"`). Si ce champ est omis, la couleur par défaut (bleu cyan) sera utilisée.
 
 ---
 

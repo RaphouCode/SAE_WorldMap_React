@@ -72,3 +72,20 @@ Quand un groupe fait une Pull Request, son intégration peut être vérifiée de
    - **Protection :** Ont-ils modifié un des fichiers essentiels par erreur (ex: `src/App.jsx`, `package.json`, `prebuild.js`...) ?
 4. Si tout est bien confiné : clique en haut à droite sur **Review changes**, sélectionne **Approve**, puis clique sur le bouton vert **Merge pull request**.
 5. *Et voilà ! Leur code est intégré sans aucun risque ! Si un fichier hors de leur dossier a été touché, laisse un commentaire explicatif sur la PR et ne valide pas tant que ce n'est pas corrigé.*
+
+---
+
+## 🚀 6. Lancer le projet localement sur sa machine
+
+Si vous souhaitez tester le globe avec votre projet avant de faire votre Pull Request, c'est indispensable ! Voici comment faire la première fois :
+
+1. Ouvrez un terminal dans le dossier du projet via VSCode (ou autre).
+2. **Étape cruciale** : installez les dépendances du projet Node.js en tapant la commande suivante :
+   ```bash
+   npm install
+   ```
+3. Une fois l'installation terminée, lancez le serveur local avec :
+   ```bash
+   npm run dev
+   ```
+4. Ouvrez le lien `http://localhost:5173` dans votre navigateur. Le script va générer de lui-même la liste des projets avant de lancer le site web.

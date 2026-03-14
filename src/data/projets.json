@@ -1,26 +1,26 @@
 [
   {
-    "id": "alan-turing",
-    "auteur": "Alan Turing",
-    "titre_objet": "Big Ben",
-    "latitude": 51.5007,
-    "longitude": -0.1246,
-    "description_courte": "Modélisation 3D de Big Ben à Londres."
+    "id": "curie-pasteur-verne",
+    "auteur": "Marie Curie, Louis Pasteur & Jules Verne",
+    "titre_objet": "Statue de la Liberté",
+    "latitude": 40.6892,
+    "longitude": -74.0445,
+    "description_courte": "Modélisation 3D de la Statue de la Liberté à New York."
   },
   {
-    "id": "jean-dupont",
-    "auteur": "Jean Dupont",
+    "id": "dupont-martin",
+    "auteur": "Jean Dupont & Claire Martin",
     "titre_objet": "Tour Eiffel",
     "latitude": 48.8584,
     "longitude": 2.2945,
     "description_courte": "Modélisation 3D de la Tour Eiffel à Paris."
   },
   {
-    "id": "marie-curie",
-    "auteur": "Marie Curie",
-    "titre_objet": "Statue de la Liberté",
-    "latitude": 40.6892,
-    "longitude": -74.0445,
-    "description_courte": "Modélisation 3D de la Statue de la Liberté à New York."
+    "id": "turing-lovelace",
+    "auteur": "Alan Turing & Ada Lovelace",
+    "titre_objet": "Big Ben",
+    "latitude": 51.5007,
+    "longitude": -0.1246,
+    "description_courte": "Modélisation 3D de Big Ben à Londres."
   }
 ]

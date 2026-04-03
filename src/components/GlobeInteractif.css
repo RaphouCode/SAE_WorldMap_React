@@ -1,7 +1,7 @@
 :root {
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-blur: blur(20px);
+  --glass-bg: transparent;
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --glass-blur: blur(30px);
   --text-primary: #ffffff;
   --text-secondary: #c9d1d9;
   --accent: #00ffcc;
@@ -27,13 +27,16 @@ body {
 
 /* --- GLASSMORPHISM COMPONENTS --- */
 .glass-panel {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  /* Apple visionOS Glass Material: 100% transparent background */
+  background: transparent;
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
-  border-left: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.02);
+  /* Inner stroke: top/left = white 20%, bottom/right = white 5% (Apple HIG spec) */
+  border-top: 1px solid rgba(255, 255, 255, 0.20);
+  border-left: 1px solid rgba(255, 255, 255, 0.20);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
 }
 
 /* --- TOPBAR --- */
@@ -403,4 +406,55 @@ body {
   visibility: visible;
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+
+/* --- LOADING OVERLAY --- */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #05070A;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease-out;
+}
+
+.loading-content {
+  text-align: center;
+  width: 300px;
+}
+
+.loading-content h2 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.loading-bar-container {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.loading-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  transition: width 0.3s ease-out;
+}
+
+.loading-content p {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-family: monospace;
 }

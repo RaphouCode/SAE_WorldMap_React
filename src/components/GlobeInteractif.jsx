@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import * as THREE from 'three';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
-import { BlackHoleShader } from '../shaders/BlackHoleShader';
+import { LiquidGlassShader } from '../shaders/LiquidGlassShader';
 import Globe from 'react-globe.gl';
 import projetsData from '../data/projets.json';
 import { globeConfig } from '../config/globeConfig';
@@ -197,7 +197,7 @@ export default function GlobeInteractif() {
         };
     }, []);
 
-    // Black Hole Glassmorphism Pass 
+    // Liquid Glass visionOS Shader Pass
     useEffect(() => {
         let animationFrameId;
 
@@ -206,26 +206,48 @@ export default function GlobeInteractif() {
                 const composer = globeEl.current.postProcessingComposer();
 
                 if (!glassPassRef.current && composer) {
-                    glassPassRef.current = new ShaderPass(BlackHoleShader);
+                    glassPassRef.current = new ShaderPass(LiquidGlassShader);
                     composer.addPass(glassPassRef.current);
-                    console.log('[Globe] BlackHole shader pass added');
+                    console.log('[Globe] LiquidGlass shader pass added');
+                }
+
+                if (composer) {
+                    // Enforce mipmap generation continuously.
+                    // EffectComposer/react-globe.gl may resize and recreate render targets,
+                    // stripping the mipmap minFilter. We check and re-apply if needed so
+                    // textureLod() can always sample blurred LODs for frosted glass
+                    // with trilinear filtering.
+                    [composer.renderTarget1, composer.renderTarget2].forEach(rt => {
+                        if (rt && rt.texture && rt.texture.minFilter !== THREE.LinearMipmapLinearFilter) {
+                            rt.texture.generateMipmaps = true;
+                            rt.texture.minFilter = THREE.LinearMipmapLinearFilter;
+                            rt.texture.magFilter = THREE.LinearFilter;
+                            rt.texture.needsUpdate = true;
+                        }
+                    });
                 }
 
                 if (glassPassRef.current) {
-                    glassPassRef.current.uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
+                    const uniforms = glassPassRef.current.uniforms;
 
+                    // Update resolution
+                    uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
+
+                    // Update topbar bounding box
                     if (topbarRef.current) {
                         const r = topbarRef.current.getBoundingClientRect();
-                        glassPassRef.current.uniforms.uTopbarBounds.value.set(
+                        uniforms.uTopbarBounds.value.set(
                             r.left / window.innerWidth,
                             1.0 - (r.bottom / window.innerHeight),
                             r.right / window.innerWidth,
                             1.0 - (r.top / window.innerHeight)
                         );
                     }
+
+                    // Update sidebar bounding box
                     if (sidebarRef.current) {
                         const r = sidebarRef.current.getBoundingClientRect();
-                        glassPassRef.current.uniforms.uSidebarBounds.value.set(
+                        uniforms.uSidebarBounds.value.set(
                             r.left / window.innerWidth,
                             1.0 - (r.bottom / window.innerHeight),
                             r.right / window.innerWidth,

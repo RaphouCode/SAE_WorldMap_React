@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rolex : l'horlogerie Suisse</title>
+
+    <script type="module"
+        src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --surface-color: #141414;
+            --primary-color: #ffcc00;
+            --secondary-color: #ff7b00;
+            --text-main: #ffffff;
+            --text-muted: #aaaaaa;
+            --border-color: #2a2a2a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* ----- TEXTE ----- */
+        .content-section {
+            flex: 1;
+            padding: 60px;
+            overflow-y: auto;
+        }
+
+        .badge {
+            background: rgba(255, 204, 0, 0.15);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            margin: 20px 0;
+            background: linear-gradient(90deg, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .author-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .author-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--surface-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .translate-toggle {
+            margin-top: 16px;
+            padding: 8px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            cursor: pointer;
+            transition: background 0.25s ease, transform 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .translate-toggle:hover {
+            background: rgba(255, 204, 0, 0.12);
+            transform: translateY(-1px);
+        }
+
+        .article-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ddd;
+        }
+
+        .highlight {
+            border-left: 4px solid var(--secondary-color);
+            padding: 15px;
+            background: rgba(255, 123, 0, 0.08);
+            font-style: italic;
+        }
+
+        /* ----- 3D ----- */
+        .model-section {
+            flex: 1.2;
+            background: radial-gradient(circle, #222, #000);
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .model-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .model-container:last-child {
+            border-bottom: none;
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column-reverse;
+                height: auto;
+            }
+
+            .model-section {
+                height: 100vh;
+            }
+
+            .model-container {
+                height: 50%;
+            }
+
+            .content-section {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- TEXTE -->
+        <div class="content-section">
+
+            
+            <button class="translate-toggle" id="translateButton" type="button">English</button>
+
+            <span class="badge">Horlogerie</span>
+            <span class="badge">Suisse</span>
+
+            
+
+            <h1>Rolex : l'horlogerie Suisse</h1>
+
+            <div class="author-meta">
+                <div class="author-avatar">E & E</div>
+                <div>
+                    <strong>Enzo JEULAND & Ethan BOUQUET</strong><br>
+                    <span style="color: var(--text-muted)">Publié le 04 Avril 2026</span>
+                </div>
+            </div>
+
+            <div class="article-body">
+
+                <p>
+                    Depuis le début du XXᵉ siècle, Rolex s’impose comme l’une des marques qui
+                    redéfinissent les codes de l’horlogerie moderne, entre innovation technique
+                    et prestige.
+                </p>
+
+                <p>
+                    Avant l’essor de la montre-bracelet, la montre de poche occupe une place 
+                    essentielle dans la culture horlogère. Elle est un objet de statut, souvent 
+                    façonné dans des matières nobles et doté de mécanismes minutieusement décorés. 
+                    Le modèle Rolex Cellini Pocket Watch 3759, en or jaune 18 carats, 
+                    illustre parfaitement cette tradition. Son boîtier précieux, son mouvement mécanique 
+                    soigné et son esthétique classique ciblent une clientèle élitiste, attachée à la 
+                    sophistication et à la durabilité. L’objectif est clair : proposer une pièce luxueuse 
+                    qui incarne le savoir‑faire artisanal tout en restant portable et élégante.
+                </p>
+
+                <p>
+                    Le passage à la montre-bracelet marque un tournant décisif. En 1926, Rolex présente 
+                    l’Oyster, première montre-bracelet véritablement étanche. Grâce à son boîtier hermétique 
+                    et à ses matériaux robustes, elle s’adresse à un public actif recherchant fiabilité et 
+                    précision au quotidien. Elle démontre qu’une montre-bracelet peut rivaliser avec la montre 
+                    de poche en termes de performance et de prestige.
+                </p>
+
+                <p>
+                    Au fil des décennies, Rolex poursuit cette dynamique avec des modèles emblématiques 
+                    comme la Submariner pour la plongée ou la Daytona pour la course automobile, qui 
+                    renforcent son image d’innovateur constant.
+                </p>
+
+                <p>
+                    Ainsi, chaque création Rolex témoigne d’une même ambition : 
+                    repousser les limites de l’horlogerie.
+                </p>
+
+                <p>
+                    Enzo Jeuland & Ethan Bouquet
+                </p>
+
+                <div class="highlight">
+                    Explorez les modèles 3D à droite : vous pouvez faire pivoter la structure,
+                    zoomer et observer les détails comme si vous l'aviez entre vos mains.
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 3D -->
+        <div class="model-section">
+
+            <div class="model-container">
+                
+
+                <model-viewer
+                    src="./assets/montre_gousset.glb"
+                    alt="Modèle 3D Enzo Jeuland"
+                    auto-rotate
+                    rotation-per-second="20deg"
+                    camera-controls
+                    shadow-intensity="1.5"
+                    exposure="1.1"
+                    environment-image="neutral">
+                </model-viewer>
+            </div>
+
+            <div class="model-container">
+                <model-viewer 
+                src="./assets/rolex_oyster4.glb" 
+                ar ar-modes="webxr 
+                scene-viewer 
+                quick-look" 
+                camera-controls 
+                tone-mapping="neutral" 
+                poster="poster.webp" 
+                shadow-intensity="1.5" 
+                autoplay camera-target="0m 0m 0m" 
+                auto-rotate>
+                    <button class="Hotspot" slot="hotspot-14" data-surface="10 0 46373 41149 90268 494.424 3.329 -496.753" data-visibility-attribute="visible">
+                        <div class="HotspotAnnotation">Boucle</div>
+                    </button>
+                    <button class="Hotspot" slot="hotspot-19" data-surface="5 0 7338620 7338741 7338739 124.364 285.828 -409.192" data-visibility-attribute="visible">
+                        <div class="HotspotAnnotation">Couronne</div>
+                    </button>
+                    <div class="progress-bar hide" slot="progress-bar">
+                        <div class="update-bar"></div>
+                    </div>
+                    <button slot="ar-button" id="ar-button">
+                        View in your space
+                    </button>
+                    <div id="ar-prompt">
+                        <img src="https://modelviewer.dev/shared-assets/icons/hand.png">
+                    </div>
+                </model-viewer>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        const translateButton = document.getElementById('translateButton');
+        const translations = {
+            fr: {
+                button: 'English',
+                badge1: 'Horlogerie',
+                badge2: 'Suisse',
+                title: 'Rolex : l\'horlogerie Suisse',
+                authorDate: 'Publié le 04 Avril 2026',
+                paragraph1: 'Depuis le début du XXᵉ siècle, Rolex s’impose comme l’une des marques qui redéfinissent les codes de l’horlogerie moderne, entre innovation technique et prestige.',
+                paragraph2: 'Avant l’essor de la montre-bracelet, la montre de poche occupe une place essentielle dans la culture horlogère. Elle est un objet de statut, souvent façonné dans des matières nobles et doté de mécanismes minutieusement décorés. Le modèle Rolex Cellini Pocket Watch 3759, en or jaune 18 carats, illustre parfaitement cette tradition. Son boîtier précieux, son mouvement mécanique soigné et son esthétique classique ciblent une clientèle élitiste, attachée à la sophistication et à la durabilité. L’objectif est clair : proposer une pièce luxueuse qui incarne le savoir‑faire artisanal tout en restant portable et élégante.',
+                paragraph3: 'Le passage à la montre-bracelet marque un tournant décisif. En 1926, Rolex présente l’Oyster, première montre-bracelet véritablement étanche. Grâce à son boîtier hermétique et à ses matériaux robustes, elle s’adresse à un public actif recherchant fiabilité et précision au quotidien. Elle démontre qu’une montre-bracelet peut rivaliser avec la montre de poche en termes de performance et de prestige.',
+                paragraph4: 'Au fil des décennies, Rolex poursuit cette dynamique avec des modèles emblématiques comme la Submariner pour la plongée ou la Daytona pour la course automobile, qui renforcent son image d’innovateur constant.',
+                paragraph5: 'Ainsi, chaque création Rolex témoigne d’une même ambition : repousser les limites de l’horlogerie.',
+                signature: 'Enzo Jeuland & Ethan Bouquet',
+                highlight: 'Explorez les modèles 3D à droite : vous pouvez faire pivoter la structure, zoomer et observer les détails comme si vous l\'aviez entre vos mains.'
+            },
+            en: {
+                button: 'Français',
+                badge1: 'Watchmaking',
+                badge2: 'Swiss',
+                title: 'Rolex: Swiss Watchmaking',
+                authorDate: 'Published on April 4, 2026',
+                paragraph1: 'Since the beginning of the 20th century, Rolex has established itself as one of the brands that redefine the codes of modern watchmaking, between technical innovation and prestige.',
+                paragraph2: 'Before the rise of the wristwatch, the pocket watch held an essential place in watchmaking culture. It was a status object, often crafted from precious materials and equipped with meticulously decorated mechanisms. The Rolex Cellini Pocket Watch 3759 model, in 18-carat yellow gold, perfectly illustrates this tradition. Its precious case, carefully crafted mechanical movement, and classic aesthetic target an elite clientele attached to sophistication and durability. The goal is clear: to offer a luxurious piece that embodies artisanal know-how while remaining wearable and elegant.',
+                paragraph3: 'The transition to the wristwatch marked a decisive turning point. In 1926, Rolex introduced the Oyster, the first truly waterproof wristwatch. Thanks to its hermetic case and robust materials, it appealed to an active audience seeking reliability and precision every day. It proved that a wristwatch could compete with the pocket watch in terms of performance and prestige.',
+                paragraph4: 'Over the decades, Rolex has continued this momentum with iconic models such as the Submariner for diving or the Daytona for auto racing, which reinforce its image as a constant innovator.',
+                paragraph5: 'Thus, each Rolex creation bears the same ambition: to push the boundaries of watchmaking.',
+                signature: 'Enzo Jeuland & Ethan Bouquet',
+                highlight: 'Explore the 3D models on the right: you can rotate the structure, zoom in, and observe the details as if you had it in your hands.'
+            }
+        };
+
+        const elements = {
+            badge1: document.querySelector('.badge:nth-of-type(1)'),
+            badge2: document.querySelector('.badge:nth-of-type(2)'),
+            title: document.querySelector('h1'),
+            authorDate: document.querySelector('.author-meta span'),
+            paragraph1: document.querySelector('.article-body p:nth-of-type(1)'),
+            paragraph2: document.querySelector('.article-body p:nth-of-type(2)'),
+            paragraph3: document.querySelector('.article-body p:nth-of-type(3)'),
+            paragraph4: document.querySelector('.article-body p:nth-of-type(4)'),
+            paragraph5: document.querySelector('.article-body p:nth-of-type(5)'),
+            signature: document.querySelector('.article-body p:nth-of-type(6)'),
+            highlight: document.querySelector('.highlight')
+        };
+
+        let currentLang = 'fr';
+
+        function updateLanguage(lang) {
+            const data = translations[lang];
+            elements.badge1.textContent = data.badge1;
+            elements.badge2.textContent = data.badge2;
+            elements.title.textContent = data.title;
+            elements.authorDate.textContent = data.authorDate;
+            elements.paragraph1.textContent = data.paragraph1;
+            elements.paragraph2.textContent = data.paragraph2;
+            elements.paragraph3.textContent = data.paragraph3;
+            elements.paragraph4.textContent = data.paragraph4;
+            elements.paragraph5.textContent = data.paragraph5;
+            elements.signature.textContent = data.signature;
+            elements.highlight.textContent = data.highlight;
+            translateButton.textContent = data.button;
+            currentLang = lang;
+        }
+
+        translateButton.addEventListener('click', () => {
+            updateLanguage(currentLang === 'fr' ? 'en' : 'fr');
+        });
+    </script>
+</body>
+
+</html>

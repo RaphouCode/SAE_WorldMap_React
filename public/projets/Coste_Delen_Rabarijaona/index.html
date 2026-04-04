@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Taj Mahak - 3D</title>
+    <!-- Import de la librairie Google Model Viewer -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="content-section">
+            <div>
+                <span class="badge">Inde</span>
+
+
+                <h1 id="fr-title">Le Taj Mahal : un chef-d’œuvre issu d’un amour impérial</h1>
+                <h1 id="en-title">The Taj Mahal: a masterpiece born of imperial love</h1>
+                <div class="article-body" id="fr">
+                    <p>
+                        En plus d’être l’une des sept merveilles du monde moderne, le Taj Mahal, situé à Agra au nord de l’Inde, est une prouesse technique 
+                        faite de marbre et née d'un deuil impérial en 1631. Pour honorer la mémoire de son épouse Mumtaz Mahal, 
+                        décédée lors d’un accouchement, l'empereur Shah Jahan a mobilisé jusqu’en 1648 plus de 20 000 artisans, 
+                        sculpteurs, mosaïstes et tailleurs de pierre, venus d’Inde, d’Asie et même d’Europe, pour ériger ce joyau 
+                        d’architecture parfaitement symétrique. Cette épreuve logistique, pour l’époque a nécessité plus de 1 000 
+                        éléphants pour acheminer les matériaux précieux à travers l’empire.
+                    </p>
+                    <p>
+                        Constitué d’un mausolée central, surplombé par un immense dôme et entouré par quatre minarets de 43 
+                        mètres de haut qui ont été construits avec ingéniosité, avec une légère inclinaison vers l’extérieur 
+                        pour éviter en cas de séisme qu’ils tombent et détruisent le bâtiment principal.
+                    </p>
+                    <p>
+                        Aujourd’hui, ce monument n’est pas seulement un tombeau, c’est un moteur économique en Inde qui attire
+                        chaque année 6 millions de visiteurs. Inscrit au patrimoine mondial de l’UNESCO depuis 1983 il est le lien
+                        entre les cultures persane, islamique et indienne.
+                    </p>
+                </div>
+                <div class="article-body" id="en">
+                    <p>
+                        In addition to being one of the Seven Wonders of the Modern World, the Taj Mahal, located
+                        in Agra in northern India, is a technical masterpiece made of marble and built out of imperial
+                        grief in 1631. To honor the memory of his wife Mumtaz Mahal, who died giving birth, Emperor
+                        Shah Jahan mobilized more than 20,000 artisans, sculptors, mosaic artists, and stonemasons from 
+                        India, Asia and Europe, to build this perfectly symmetrical masterpiece. This logistical challenge, at 
+                        the time required more than 1000 elephants to transport precious materials through the empire.
+                    </p>
+                    <p>
+                        Composed of a central mausoleum, topped by a huge dome and surrounded by four 43 meter high 
+                        minarets, which were ingeniously constructed with a slight outward inclination to prevent them from
+                        falling and destroying the main building in the event of an earthquake.
+                    </p>
+                    <p>
+                        Nowadays, this monument isn’t only a tomb, it is also an economic driver in India, which attracts
+                        around 6 million visitors each year. Inscribed as a UNESCO World Heritage Site since 1983, it represents
+                        a link between Persian, Islamic, and Indian cultures.
+                    </p>
+                </div>
+                <div class="author-meta">
+                    <div class="author-info">
+                        <p class="name">Delen Corentin, Rabarijaona Samuel & Coste Maxence</p>
+                        <p class="date">Publié le 28 Mars 2026</p>
+                    </div>
+                </div>
+                <div class="lang-buttons">
+                    <button id="btn-fr" class="active">FR</button>
+                    <button id="btn-en">EN</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="model-section">
+            <model-viewer src="./assets/Taj-Mahal.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="poster.webp" shadow-intensity="0" alt="Taj Mahal 3D" rotation-per-second="6deg" auto-rotate exposure="1.05" shadow-softness="0" camera-orbit="1600deg 82.44deg 717.2m" field-of-view="20deg" min-camera-orbit="auto 0deg 60%" max-camera-orbit="auto 90deg 120%" min-field-of-view="5deg" max-field-of-view="30deg" class="taj-viewer" touch-action="pan-y" disable-pan interaction-prompt="none" loading="eager" reveal="auto" environment-image="./assets/bloem_field_sunrise_2k.hdr"> 
+                <button class="Hotspot" slot="hotspot-4" data-position="-108.97039949776135m 43.040816302897014m -116.85622663825347m" data-normal="0.6493107155391666m 0.020521560464187565m -0.760246315507106m" data-visibility-attribute="visible">
+                    <div class="HotspotAnnotation">
+                        Minaret
+                    </div>
+                </button>
+                <button class="Hotspot" slot="hotspot-5" data-position="1.2365986328350118m 32.61825982455325m -34.05695678528207m" data-normal="3.9180879287997287e-7m 0.0004654459257829225m -0.9999998916799625m" data-visibility-attribute="visible">
+                    <div class="HotspotAnnotation">
+                        Mausolée
+                    </div>
+                </button>
+                <button class="Hotspot" slot="hotspot-6" data-position="-0.9203693025411468m 84.23288187444982m -24.998063639121256m" data-normal="-0.09383737008037306m 0.2890060984032759m -0.9527171789477269m" data-visibility-attribute="visible">
+                    <div class="HotspotAnnotation">
+                        Dome
+                    </div>
+                </button>
+                <div class="progress-bar hide" slot="progress-bar">
+                    <div class="update-bar"></div>
+                </div>
+                <button slot="ar-button" id="ar-button">
+                    View in your space
+                </button>
+            </model-viewer>
+
+        </div>
+
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>

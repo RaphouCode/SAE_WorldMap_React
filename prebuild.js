@@ -16,6 +16,27 @@ if (!fs.existsSync(outputDir)) {
 }
 
 const projetsData = [];
+const MAX_SIZE_MB = 100; // Limite de sécurité pour l'hébergement web
+
+/**
+ * Calcule la taille totale d'un dossier de manière récursive (en octets)
+ */
+function getDirSize(dirPath) {
+  let size = 0;
+  const files = fs.readdirSync(dirPath);
+
+  for (const file of files) {
+    const filePath = path.join(dirPath, file);
+    const stat = fs.statSync(filePath);
+
+    if (stat.isDirectory()) {
+      size += getDirSize(filePath);
+    } else {
+      size += stat.size;
+    }
+  }
+  return size;
+}
 
 // Read subdirectories
 try {
@@ -26,6 +47,16 @@ try {
     const stat = fs.statSync(folderPath);
 
     if (stat.isDirectory()) {
+      // --- Vérification Sécurité: Taille du dossier ---
+      const totalSize = getDirSize(folderPath);
+      const sizeMB = totalSize / (1024 * 1024);
+
+      if (sizeMB > MAX_SIZE_MB) {
+        console.warn(`\x1b[31m[Security] BLOQUAGE: Le projet "${folder}" est trop lourd (${sizeMB.toFixed(2)} Mo). Limite autorisée : ${MAX_SIZE_MB} Mo.\x1b[0m`);
+        console.warn(`\x1b[31m[Security] Merci de compresser tes textures sur gltf.report avant de refaire une PR.\x1b[0m`);
+        // On continue quand même le prebuild, mais l'alerte est ultra visible.
+      }
+      
       const infoPath = path.join(folderPath, 'infos.json');
 
       if (fs.existsSync(infoPath)) {

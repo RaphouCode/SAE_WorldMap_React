@@ -42,8 +42,8 @@ export const globeConfig = {
     // -- ATMOSPHÈRE & CADASTRAGE --
     atmosphere: {
         show: true,
-        color: '#8a2269',       // Couleur du halo nocturne
-        altitude: 0.25,         // Épaisseur du halo
+        color: '#4b5f7a',       // Couleur du halo nocturne
+        altitude: 0.15,         // Épaisseur du halo
     },
 
     // -- CONTRÔLES & CAMERA --

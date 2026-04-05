@@ -1,10 +1,9 @@
 {
-    "id": "suisse-montre",
+    "id": "Bouquet_Jeuland",
     "auteur": "Enzo Jeuland & Ethan Bouquet",
     "titre_objet": "Horlogerie Suisse ",
     "latitude": 46.8182,
     "longitude": 8.2275,
-    "description_courte": "Projet horlogerie en Suisse.",
-    "couleur": "#006039",
-    "url": "/projets/enzo-ethan/montre.html"
+    "description_courte": "Rolex, une marque suisse de renommée mondiale",
+    "couleur": "#ffcc00"
 }

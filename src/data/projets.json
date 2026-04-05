@@ -1,5 +1,14 @@
 [
   {
+    "id": "Bouquet_Jeuland",
+    "auteur": "Enzo Jeuland & Ethan Bouquet",
+    "titre_objet": "Horlogerie Suisse ",
+    "latitude": 46.8182,
+    "longitude": 8.2275,
+    "description_courte": "Rolex, une marque suisse de renommée mondiale",
+    "couleur": "#ffcc00"
+  },
+  {
     "id": "Coste_Delen_Rabarijaona",
     "auteur": "Delen Corentin, Rabarijaona Samuel & Coste Maxence",
     "titre_objet": "Taj Mahal",

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trésors de la Tombe Royale d'Ur</title>
+    <meta name="description"
+        content="Explorez les trésors funéraires du roi Meskalamdug – casque, dague et fourreau – en modélisation 3D interactive.">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-light: #f0d878;
+            --gold-dim: rgba(212, 175, 55, 0.25);
+            --text: #f0ece2;
+            --text-muted: rgba(240, 236, 226, 0.55);
+            --bg-deep: #0a0604;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-image: url('./assets/fondrouge.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #310808;
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== MAIN LAYOUT ===== */
+        .container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            background: rgba(15, 5, 5, 0.6);
+            backdrop-filter: blur(2px);
+        }
+
+        /* ===== LEFT: 3D VIEWER ===== */
+        .model-section {
+            flex: 1.2;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .viewer-area {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .viewer-area model-viewer {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            --poster-color: transparent;
+            opacity: 0;
+            transition: opacity 0.6s var(--ease);
+            pointer-events: none;
+        }
+
+        .viewer-area model-viewer.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Glow behind model */
+        .viewer-area::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: 50%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+            animation: glowPulse 4s ease-in-out infinite;
+        }
+
+        /* Shadow under model */
+        .viewer-area::before {
+            content: '';
+            position: absolute;
+            bottom: 12%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 25px;
+            background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.45) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* ===== MODEL SELECTOR TABS ===== */
+        .model-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            padding: 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(212, 175, 55, 0.08);
+        }
+
+        .model-tab {
+            flex: 1;
+            padding: 16px 10px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s var(--ease);
+            position: relative;
+        }
+
+        .model-tab::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 60%;
+            height: 2px;
+            background: var(--gold);
+            transition: transform 0.4s var(--ease);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        }
+
+        .model-tab:hover {
+            color: var(--text);
+        }
+
+        .model-tab.active {
+            color: var(--gold);
+        }
+
+        .model-tab.active::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        /* ===== HOTSPOTS ===== */
+        .hotspot {
+            background: rgba(212, 175, 55, 0.85);
+            border: 2px solid var(--gold-light);
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 0 14px rgba(212, 175, 55, 0.5);
+            animation: hotspotPulse 2.5s ease-in-out infinite;
+            transition: transform 0.3s var(--ease);
+        }
+
+        .hotspot:hover {
+            transform: scale(1.3);
+        }
+
+        .hotspot::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            animation: hotspotRing 2.5s ease-in-out infinite;
+        }
+
+        .hotspot-annotation {
+            position: absolute;
+            left: 32px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(10, 6, 4, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 10px;
+            padding: 12px 16px;
+            min-width: 160px;
+            max-width: 230px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+            transform: translateY(-50%) translateX(-6px);
+        }
+
+        .hotspot:hover .hotspot-annotation {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(-50%) translateX(0);
+        }
+
+        .hotspot-annotation .hs-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .hotspot-annotation .hs-text {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ===== RIGHT: ARTICLE ===== */
+        .content-section {
+            flex: 1;
+            padding: 80px 100px 80px 40px;
+            overflow-y: auto;
+            position: relative;
+            mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+        }
+
+        .content-section::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .content-section::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .content-section::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+        }
+
+        .content-section::-webkit-scrollbar-thumb:hover {
+            background: var(--gold-light);
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 4rem;
+            margin: 0 0 15px 0;
+            line-height: 1.1;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            color: #ffffff;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 15px;
+            display: inline-block;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            font-weight: 500;
+            opacity: 0;
+            animation: fadeSlideIn 1s var(--ease) 0.2s forwards;
+        }
+
+        .article-body {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #ffffff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            animation: fadeSlideIn 1s var(--ease) 0.5s forwards;
+        }
+
+        .article-body h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            color: #ffffff;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+            text-transform: uppercase;
+        }
+
+        .article-body p {
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .author-meta {
+            margin-top: 80px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 10px;
+            opacity: 0;
+            animation: fadeSlideIn 1s var(--ease) 0.8s forwards;
+        }
+
+        .author-meta .label {
+            font-family: 'Oswald', sans-serif;
+            font-weight: bold;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .author-meta .names {
+            font-size: 1rem;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+        }
+
+        /* ===== KEYFRAMES ===== */
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 200% center; }
+        }
+
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+        }
+
+        @keyframes hotspotPulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.4); }
+            50% { box-shadow: 0 0 22px rgba(212, 175, 55, 0.7); }
+        }
+
+        @keyframes hotspotRing {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.6); opacity: 0; }
+        }
+
+        @keyframes modelEntrance {
+            from { opacity: 0; transform: scale(0.92); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                height: 100vh;
+                overflow-y: auto;
+            }
+
+            .container::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            .container::-webkit-scrollbar-track {
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            .container::-webkit-scrollbar-thumb {
+                background: var(--gold);
+            }
+
+            .model-section {
+                flex: none;
+                height: 50vh;
+                width: 100%;
+            }
+
+            .content-section {
+                flex: none;
+                width: 100%;
+                padding: 40px 30px;
+                overflow-y: visible;
+                mask-image: none;
+                -webkit-mask-image: none;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- ===== LEFT: 3D VIEWER WITH TABS ===== -->
+        <div class="model-section">
+            <div class="viewer-area">
+
+                <!-- MODEL 1: CASQUE -->
+                <model-viewer id="model-casque" class="active"
+                    src="./assets/casqueLowPoly.glb"
+                    alt="Casque en or de Meskalamdug"
+                    auto-rotate rotation-per-second="25deg"
+                    camera-controls touch-action="pan-y"
+                    shadow-intensity="1.2" shadow-softness="0.8"
+                    exposure="1.1"
+                    camera-orbit="45deg 75deg 105%"
+                    min-camera-orbit="auto auto 80%"
+                    max-camera-orbit="auto auto 200%"
+                    interaction-prompt="none"
+                    interpolation-decay="80"
+                    loading="eager">
+
+                    <button class="hotspot" slot="hotspot-1"
+                        data-position="-2.126m 2.513m -0.343m" data-normal="-0.198m 0.278m -0.940m">
+                        <div class="hotspot-annotation">
+                            <div class="hs-title">Le Chignon Royal</div>
+                            <div class="hs-text">Insigne du "Roi de Kish", cette coiffure revendique la domination sur Sumer. On la retrouve sur la Stèle des Vautours.</div>
+                        </div>
+                    </button>
+                    <button class="hotspot" slot="hotspot-2"
+                        data-position="0.268m 1.538m -1.668m" data-normal="0.385m -0.418m -0.823m">
+                        <div class="hotspot-annotation">
+                            <div class="hs-title">Audition Tactique</div>
+                            <div class="hs-text">Les oreilles sont percées en leur centre pour permettre au porteur d'entendre les ordres au cœur du combat.</div>
+                        </div>
+                    </button>
+                    <button class="hotspot" slot="hotspot-3"
+                        data-position="1.106m 3.335m 0.626m" data-normal="0.526m 0.751m 0.399m">
+                        <div class="hotspot-annotation">
+                            <div class="hs-title">Technique Monopièce</div>
+                            <div class="hs-text">Exploit de dinanderie martelé à partir d'une seule feuille d'or, alternant frappe et cycles de "recuit" thermique.</div>
+                        </div>
+                    </button>
+                </model-viewer>
+
+                <!-- MODEL 2: FOURREAU -->
+                <model-viewer id="model-fourreau"
+                    src="./assets/Fourreau.glb"
+                    alt="Fourreau de la dague de Meskalamdug"
+                    auto-rotate rotation-per-second="20deg"
+                    camera-controls touch-action="pan-y"
+                    shadow-intensity="1" shadow-softness="0.8"
+                    exposure="1.1"
+                    camera-orbit="30deg 80deg 105%"
+                    min-camera-orbit="auto auto 80%"
+                    max-camera-orbit="auto auto 200%"
+                    interaction-prompt="none"
+                    interpolation-decay="80"
+                    loading="lazy">
+
+                    <button class="hotspot" slot="hotspot-1"
+                        data-position="0.089m 1.817m -0.515m" data-normal="0.847m -0.523m -0.097m">
+                        <div class="hotspot-annotation">
+                            <div class="hs-title">Filigrane & Orfèvrerie</div>
+                            <div class="hs-text">Décors créés par "strip-twisting", consistant à enrouler de minuscules bandes d'or d'un millimètre.</div>
+                        </div>
+                    </button>
+                    <button class="hotspot" slot="hotspot-2"
+                        data-position="0.041m 2.592m 0.815m" data-normal="0.000m 0.551m 0.835m">
+                        <div class="hotspot-annotation">
+                            <div class="hs-title">Soudure par Réaction</div>
+                            <div class="hs-text">Utilisation de sel de cuivre et de colle organique pour fixer les granulations sans fondre la structure.</div>
+                        </div>
+                    </button>
+                </model-viewer>
+
+                <!-- MODEL 3: DAGUE (ex-Masque) -->
+                <model-viewer id="model-dague"
+                    src="./assets/maskalam.glb"
+                    alt="Dague en or de Meskalamdug"
+                    auto-rotate rotation-per-second="20deg"
+                    camera-controls touch-action="pan-y"
+                    shadow-intensity="1.2" shadow-softness="0.8"
+                    exposure="1.1"
+                    camera-orbit="0deg 85deg 105%"
+                    min-camera-orbit="auto auto 80%"
+                    max-camera-orbit="auto auto 200%"
+                    interaction-prompt="none"
+                    interpolation-decay="80"
+                    loading="lazy">
+
+                    <button class="hotspot" slot="hotspot-1"
+                        data-position="-0.009m -0.153m -0.570m" data-normal="0.023m -0.000m -1.000m">
+                        <div class="hotspot-annotation">
+                            <div class="hs-title">Sésame Spirituel</div>
+                            <div class="hs-text">La lame servait de cadeau diplomatique aux dieux de l'au-delà (Gidim) pour maintenir le rang du Roi.</div>
+                        </div>
+                    </button>
+                    <button class="hotspot" slot="hotspot-2"
+                        data-position="0.013m -1.616m -0.593m" data-normal="0.131m 0.018m -0.991m">
+                        <div class="hotspot-annotation">
+                            <div class="hs-title">Lapis-lazuli Profond</div>
+                            <div class="hs-text">Pierre précieuse importée des mines de Sar-e-Sang (Afghanistan), à plus de 2500 km des ateliers d'Ur.</div>
+                        </div>
+                    </button>
+                </model-viewer>
+            </div>
+
+            <!-- TAB SELECTOR -->
+            <div class="model-tabs">
+                <button class="model-tab active" data-model="model-casque">Casque d'Or</button>
+                <button class="model-tab" data-model="model-fourreau">Fourreau</button>
+                <button class="model-tab" data-model="model-dague">Dague</button>
+            </div>
+        </div>
+
+        <!-- ===== RIGHT: ARTICLE (un seul bloc, texte original) ===== -->
+        <div class="content-section">
+            <div class="subtitle">Mésopotamie Antique • vers 2550 av. J.-C.</div>
+            <h1>L'OR ÉTERNEL DU<br>ROI MESKALAMDUG</h1>
+
+            <div class="article-body" style="text-align: justify; line-height: 1.7;">
+                <p>
+                    Sous les sables du sud de l'Irak, le Cimetière royal d'Ur a dissimulé le trésor de Meskalamdug,
+                    "héros de la bonne terre". Les modèles 3D que nous vous présentons invitent à observer le casque et
+                    la dague originels de ce puissant souverain sumérien. Loin d'être de simples antiquités, ces
+                    chefs-d'œuvre incarnent l'apogée d'un "Roi de Kish" dont le pouvoir a défié le temps.
+                </p>
+
+                <h2>Prouesse de Métallurgie</h2>
+                <p>
+                    Ces objets témoignent d'une ingénierie métallurgique sans précédent. Le casque est un exploit de
+                    dinanderie, intégralement repoussé à partir d'une seule feuille d'alliage d'or massif. Ce façonnage
+                    exigeant une grande maîtrise du feu et du martelage est une prouesse si complexe qu'elle reste
+                    quasiment inégalée dans l'histoire de l'orfèvrerie.
+                </p>
+
+                <h2>Innovations et Symbolisme</h2>
+                <p>
+                    La dague révèle d'autres innovations pionnières. Elle allie une lame en or pur, une poignée en
+                    lapis-lazuli importé des lointaines montagnes d'Afghanistan, et un fourreau en argent. Ce fourreau
+                    illustre l'une des plus anciennes utilisations du filigrane et de la granulation au monde,
+                    impliquant de savantes techniques de soudure chimique.
+                </p>
+
+                <h2>L'Iconographie Royale</h2>
+                <p>
+                    La forme de ces œuvres matérialise une dimension culturelle, spirituelle et politique. Cette
+                    coiffure sculptée institutionnalise l'iconographie des souverains sumériens, agissant comme
+                    véritable couronne. Dépourvu des serviteurs sacrifiés présents dans les tombes d'Ur, Meskalamdug
+                    s'en remettait à la magie de l'or. Le casque fige son identité royale, tandis que la dague devient
+                    un précieux sésame destiné aux divinités infernales. L'artisanat a été utilisé comme arme contre le
+                    néant.
+                </p>
+
+                <p style="font-style: italic; opacity: 0.6; margin-top: 40px; font-size: 0.95rem; text-align: left;">
+                    Interagissez avec la modélisation à votre gauche. Faites glisser pour pivoter, et utilisez la
+                    molette pour zoomer sur les détails de l'orfèvrerie sumérienne.
+                </p>
+            </div>
+
+            <div class="author-meta">
+                <div class="label">Recherche & Modélisation 3D</div>
+                <div class="names">Raphaël Boullard, Wassim Kadi, Noa Fleury</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // ===== TAB SWITCHING WITH 3D ANIMATIONS =====
+        const tabs = document.querySelectorAll('.model-tab');
+        const viewers = document.querySelectorAll('.viewer-area model-viewer');
+
+        // Camera orbits to animate TO when switching models (dramatic entrance angles)
+        const cameraPresets = {
+            'model-casque': { orbit: '45deg 75deg 105%', target: 'auto auto auto' },
+            'model-fourreau': { orbit: '30deg 80deg 105%', target: 'auto auto auto' },
+            'model-dague': { orbit: '0deg 85deg 105%', target: 'auto auto auto' },
+        };
+
+        // Dramatic entrance orbits (starts zoomed out and rotated, then eases to preset)
+        const entranceOrbits = {
+            'model-casque': '180deg 90deg 180%',
+            'model-fourreau': '-90deg 60deg 170%',
+            'model-dague': '120deg 100deg 160%',
+        };
+
+        function switchModel(targetId) {
+            const targetViewer = document.getElementById(targetId);
+            if (!targetViewer || targetViewer.classList.contains('active')) return;
+
+            // Deactivate all
+            viewers.forEach(v => v.classList.remove('active'));
+            tabs.forEach(t => t.classList.remove('active'));
+
+            // Activate target
+            targetViewer.classList.add('active');
+            document.querySelector(`.model-tab[data-model="${targetId}"]`).classList.add('active');
+
+            // Dramatic camera animation: jump to entrance orbit, then smooth to final
+            const entrance = entranceOrbits[targetId];
+            const final = cameraPresets[targetId].orbit;
+
+            targetViewer.cameraOrbit = entrance;
+            targetViewer.jumpCameraToGoal();
+
+            // Slight delay then animate to final position
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    targetViewer.cameraOrbit = final;
+                }, 50);
+            });
+        }
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => switchModel(tab.dataset.model));
+        });
+
+        // ===== ENTRANCE ZOOM ON FIRST LOAD =====
+        viewers.forEach(mv => {
+            mv.addEventListener('load', () => {
+                if (mv.classList.contains('active')) {
+                    const preset = cameraPresets[mv.id];
+                    // Start zoomed out
+                    mv.cameraOrbit = entranceOrbits[mv.id];
+                    mv.jumpCameraToGoal();
+
+                    setTimeout(() => {
+                        mv.cameraOrbit = preset.orbit;
+                    }, 200);
+                }
+            });
+        });
+
+        // ===== KEYBOARD NAVIGATION =====
+        document.addEventListener('keydown', (e) => {
+            const activeIndex = [...tabs].findIndex(t => t.classList.contains('active'));
+            if (e.key === 'ArrowLeft' && activeIndex > 0) {
+                switchModel(tabs[activeIndex - 1].dataset.model);
+            } else if (e.key === 'ArrowRight' && activeIndex < tabs.length - 1) {
+                switchModel(tabs[activeIndex + 1].dataset.model);
+            }
+        });
+
+        // ===== STOP AUTO-ROTATE ON HOTSPOT HOVER =====
+        document.querySelectorAll('.hotspot').forEach(hotspot => {
+            hotspot.addEventListener('mouseenter', () => {
+                const viewer = hotspot.closest('model-viewer');
+                if (viewer) viewer.autoRotate = false;
+            });
+            hotspot.addEventListener('mouseleave', () => {
+                const viewer = hotspot.closest('model-viewer');
+                if (viewer) viewer.autoRotate = true;
+            });
+        });
+    </script>
+</body>
+
+</html>

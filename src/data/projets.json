@@ -19,11 +19,11 @@
   },
   {
     "id": "dupont-martin",
-    "auteur": "Jean Dupont & Claire Martin",
-    "titre_objet": "Tour Eiffel",
-    "latitude": 48.8584,
-    "longitude": 2.2945,
-    "description_courte": "Ceci est un projet d'exemple pour montrer comment intégrer un modèle 3D sur le globe collaboratif.",
-    "couleur": "#ff00cc"
+    "auteur": "Raphael Boullard, Wassim Kadi, Noa Fleury",
+    "titre_objet": "Casque et Dague d'Ur",
+    "latitude": 30.9622,
+    "longitude": 46.1044,
+    "description_courte": "Découvrez le casque en or de Meskalamdug et la dague en or avec son fourreau, trésors de la tombe royale d'Ur.",
+    "couleur": "#701616"
   }
 ]

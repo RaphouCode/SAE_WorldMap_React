@@ -25,5 +25,14 @@
     "longitude": 46.1044,
     "description_courte": "Découvrez le casque en or de Meskalamdug et la dague en or avec son fourreau, trésors de la tombe royale d'Ur.",
     "couleur": "#701616"
+  },
+  {
+    "id": "Simon_Jean_Thiam_Tocqueville",
+    "auteur": "Léana Simon Jean, Malik Thiam et Joachim Tocqueville",
+    "titre_objet": "Veena et ghunghroos",
+    "latitude": 14.943338,
+    "longitude": 77.5505,
+    "description_courte": "Modélisation 3D de la Veena et de ghunghroos",
+    "couleur": "#FF9933"
   }
 ]
